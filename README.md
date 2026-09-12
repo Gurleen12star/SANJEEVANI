@@ -38,7 +38,7 @@ Here is a comprehensive breakdown of what makes Sanjeevani a complete ecosystem:
 | **Privacy & Sec** | 5. Zero-Knowledge Proofs | Farmers hide sensitive fields (Aadhaar/Phone) during application. |
 | | 6. Encrypted Hash Vault | FPO acts as the sole custodian of raw data; banks receive hashes. |
 | | 7. Granular Access Control | Data access expires automatically after loan decision. |
-| **Community Trust** | 8. Real-Time Vouch Sync | FPOs approve community members, instantly boosting their Trust Score. |
+| **Community Trust** | 8. Dynamic Trust Recommendations | Farmers receive actionable advice on how to improve low scores (e.g., getting more vouches). |
 | | 9. Community Risk Buffer | FPO manages a collective ₹5,00,000 guarantee fund to cover defaults. |
 | | 10. Community Repayment Ledger | Transparent tracking of group financial health to prove low default rates. |
 | **Market & Env** | 11. Live Env Risk Radar | Open-Meteo GPS telemetry flags pest/monsoon risks in real-time. |

@@ -192,6 +192,21 @@ export default function FarmerDashboard() {
             </div>
           )}
 
+          {/* How to Improve Score (Dynamic Recommendations) */}
+          {trustScore && trustScore.score < 75 && (
+            <div style={{ background: '#fffbeb', border: '1.5px solid #fcd34d', borderRadius: '16px', padding: '16px', marginTop: '16px', animation: 'fadeIn 0.3s ease-in' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+                <span style={{ fontSize: '18px' }}>💡</span>
+                <div style={{ fontSize: '13px', fontWeight: 800, color: '#b45309' }}>How to Improve Your Score</div>
+              </div>
+              <ul style={{ margin: 0, paddingLeft: '24px', color: '#92400e', fontSize: '12px', lineHeight: 1.6 }}>
+                {vouches.length < 3 && <li style={{ marginBottom: '8px' }}><strong>Get more Community Vouches:</strong> Ask FPO members to vouch for you. Each vouch increases trust. (+15 pts)</li>}
+                {(!cropScan || cropScan.crop_health_score < 70) && <li style={{ marginBottom: '8px' }}><strong>Update Crop Scan:</strong> Take a fresh, clear photo of your crops to prove current health. (+20 pts)</li>}
+                <li style={{ marginBottom: '4px' }}><strong>Pre-Harvest Contract:</strong> Sign a supply contract with your FPO to guarantee market linkage. (+30 pts)</li>
+              </ul>
+            </div>
+          )}
+
         {/* Loan Status Timeline (if active) */}
         {loanStatus !== 'idle' && (
           <div style={{ background: '#fff', borderRadius: '16px', padding: '20px', marginBottom: '16px', border: '1.5px solid #e2e8f0', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>
