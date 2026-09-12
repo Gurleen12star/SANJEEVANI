@@ -13,9 +13,7 @@ export function FarmerNav({ title }) {
         </button>
         <div style={{ width: 1, height: 20, background: '#e2e8f0' }}></div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <div style={{ width: 32, height: 32, background: '#16a34a', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span style={{ color: '#fff', fontWeight: 800, fontSize: '14px' }}>S</span>
-          </div>
+          <img src="/logo.png" alt="Sanjeevani Logo" style={{ width: 32, height: 32, objectFit: 'contain', borderRadius: '8px' }} />
           <span style={{ fontWeight: 700, fontSize: '15px', color: '#0f172a' }}>{title || 'SANJEEVANI'}</span>
         </div>
       </div>
