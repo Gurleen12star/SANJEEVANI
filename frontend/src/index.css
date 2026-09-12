@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sanjeevani-green: #15803d;
+  --color-sanjeevani-lightGreen: #4ade80;
+  --color-sanjeevani-darkGreen: #14532d;
+  --color-sanjeevani-blue: #1e3a8a;
+  --color-sanjeevani-lightBlue: #3b82f6;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f8fafc;
+}
+
+.glass-card {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
