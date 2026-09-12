@@ -11,7 +11,25 @@
 
 <hr/>
 
-## 🌟 Why Sanjeevani is the Best (Our USP)
+## 🛠️ How to Run Locally (For Judges)
+If you are evaluating this repository locally, follow these steps to boot the entire ecosystem in 2 minutes:
+
+**1. Start the FastAPI Backend (Terminal 1)**
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+**2. Start the React Frontend (Terminal 2)**
+```bash
+cd frontend
+npm install
+npm run dev
+```
+*The app will be live at `http://localhost:5173`. We have provided an **Auto-Fill Demo Credentials** button on the Login page for your convenience.*
+
+<hr/>## 🌟 Why Sanjeevani is the Best (Our USP)
 Current agricultural credit systems rely on formal credit scores, automatically rejecting 70% of rural Indian farmers. **Sanjeevani turns social capital into a digital asset.** By combining **Community Vouching (FPOs)** with **AI Crop Underwriting** and **Zero-Knowledge Privacy (ZKP)**, we allow farmers to borrow without surrendering their data, while providing banks with mathematically de-risked lending portfolios.
 
 ---
