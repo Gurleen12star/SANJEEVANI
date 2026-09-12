@@ -87,7 +87,7 @@ export default function FarmerDashboard() {
   const status = statusConfig[loanStatus];
 
   const card = (onClick, icon, title, subtitle, color = '#16a34a') => (
-    <button onClick={onClick} style={{ background: '#fff', border: '1.5px solid #e2e8f0', borderRadius: '16px', padding: '20px', display: 'flex', alignItems: 'center', gap: '16px', cursor: 'pointer', textAlign: 'left', width: '100%', transition: 'all 0.2s', boxShadow: '0 1px 4px rgba(0,0,0,0.06)' }}
+    <button onClick={onClick} aria-label={`${title}. ${subtitle}`} style={{ background: '#fff', border: '1.5px solid #e2e8f0', borderRadius: '16px', padding: '20px', display: 'flex', alignItems: 'center', gap: '16px', cursor: 'pointer', textAlign: 'left', width: '100%', transition: 'all 0.2s', boxShadow: '0 1px 4px rgba(0,0,0,0.06)' }}
       onMouseEnter={e => e.currentTarget.style.borderColor = color}
       onMouseLeave={e => e.currentTarget.style.borderColor = '#e2e8f0'}>
       <div style={{ width: 48, height: 48, borderRadius: '12px', background: color + '18', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '22px', flexShrink: 0 }}>{icon}</div>
@@ -112,7 +112,7 @@ export default function FarmerDashboard() {
             <div style={{ fontSize: '28px', marginBottom: '12px' }}>👋</div>
             <h2 style={{ fontSize: '20px', fontWeight: 800, marginBottom: '8px' }}>Welcome, Ram Singh!</h2>
             <p style={{ fontSize: '13px', color: '#bbf7d0', lineHeight: 1.6, marginBottom: '20px' }}>Let's scan your first crop to start building your Trust Score and unlock credit access.</p>
-            <button onClick={() => navigate('/farmer/scan')}
+            <button onClick={() => navigate('/farmer/scan')} aria-label="Scan your crop now"
               style={{ background: '#fff', color: '#15803d', border: 'none', borderRadius: '12px', padding: '12px 24px', fontWeight: 800, fontSize: '14px', cursor: 'pointer' }}>
               📷 Scan My Crop Now →
             </button>
