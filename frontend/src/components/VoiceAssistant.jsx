@@ -260,7 +260,18 @@ export default function VoiceAssistant() {
           <div style={{ fontSize: '13px', fontWeight: 700, color: '#0f172a', marginBottom: '12px' }}>Voice Assistant Language</div>
           <select 
             value={lang} 
-            onChange={(e) => setLang(e.target.value)}
+            onChange={(e) => {
+              const newLang = e.target.value;
+              setLang(newLang);
+              
+              // --- TRIGGER GOOGLE TRANSLATE ENGINE ---
+              const googleLangCode = newLang.split('-')[0];
+              const gtSelect = document.querySelector('.goog-te-combo');
+              if (gtSelect) {
+                gtSelect.value = googleLangCode;
+                gtSelect.dispatchEvent(new Event('change'));
+              }
+            }}
             style={{ width: '100%', padding: '10px', borderRadius: '10px', border: '1.5px solid #e2e8f0', fontSize: '13px', outline: 'none', background: '#f8fafc', cursor: 'pointer' }}
           >
             {LANGUAGES.map(l => (
