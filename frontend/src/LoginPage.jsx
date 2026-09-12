@@ -175,10 +175,13 @@ export default function LoginPage() {
           <div style={{ position: 'absolute', bottom: '80px', right: '-30px', width: '140px', height: '140px', background: '#14532d', borderRadius: '50%', opacity: 0.5 }}></div>
           <div style={{ position: 'absolute', top: '60px', right: '30px', width: '80px', height: '80px', background: '#16a34a', borderRadius: '50%', opacity: 0.4 }}></div>
 
-          {/* Top brand name */}
-          <div style={{ position: 'absolute', top: '24px', right: '28px', textAlign: 'right', zIndex: 2 }}>
-            <div style={{ color: '#fff', fontWeight: 800, fontSize: '18px', letterSpacing: '0.5px' }}>SANJEEVANI</div>
-            <div style={{ color: '#86efac', fontSize: '11px', fontWeight: 600, letterSpacing: '2px' }}>( PROTOCOL )</div>
+          {/* Top brand name with logo */}
+          <div style={{ position: 'absolute', top: '24px', right: '28px', display: 'flex', alignItems: 'center', gap: '12px', zIndex: 2 }}>
+            <div style={{ textAlign: 'right' }}>
+              <div style={{ color: '#fff', fontWeight: 800, fontSize: '18px', letterSpacing: '0.5px' }}>SANJEEVANI</div>
+              <div style={{ color: '#86efac', fontSize: '11px', fontWeight: 600, letterSpacing: '2px' }}>( PROTOCOL )</div>
+            </div>
+            <img src="/logo.png" alt="Sanjeevani Logo" style={{ width: 42, height: 42, objectFit: 'contain', borderRadius: '10px' }} />
           </div>
 
           {/* Farmer photo in a card frame */}
