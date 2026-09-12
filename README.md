@@ -7,6 +7,11 @@
   [![Hackathon: 100/100](https://img.shields.io/badge/Hackathon_Score-100%2F100-success.svg)](#)
   [![Status: Live Prototype](https://img.shields.io/badge/Status-Live_Prototype-blue.svg)](#)
   [![AI Accuracy: 99.37%](https://img.shields.io/badge/AI_Accuracy-99.37%25-green.svg)](#)
+
+  <br/>
+  
+  ### 🌍 **[Click Here for Live Frontend Demo (Vercel)](https://sanjeevani-zeta-sandy.vercel.app/)**
+  **Live Backend API (Render):** `https://sanjeevani-ol6k.onrender.com`
 </div>
 
 <hr/>
@@ -28,6 +33,8 @@ npm install
 npm run dev
 ```
 *The app will be live at `http://localhost:5173`. We have provided an **Auto-Fill Demo Credentials** button on the Login page for your convenience.*
+
+*(Note: If you prefer not to run it locally, you can use our [Live Cloud Demo](https://sanjeevani-zeta-sandy.vercel.app/))*
 
 <hr/>## 🌟 Why Sanjeevani is the Best (Our USP)
 Current agricultural credit systems rely on formal credit scores, automatically rejecting 70% of rural Indian farmers. **Sanjeevani turns social capital into a digital asset.** By combining **Community Vouching (FPOs)** with **AI Crop Underwriting** and **Zero-Knowledge Privacy (ZKP)**, we allow farmers to borrow without surrendering their data, while providing banks with mathematically de-risked lending portfolios.
