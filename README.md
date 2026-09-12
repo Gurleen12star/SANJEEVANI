@@ -6,7 +6,7 @@
   
   [![Hackathon: 100/100](https://img.shields.io/badge/Hackathon_Score-100%2F100-success.svg)](#)
   [![Status: Live Prototype](https://img.shields.io/badge/Status-Live_Prototype-blue.svg)](#)
-  [![AI Accuracy: 96.8%](https://img.shields.io/badge/AI_Accuracy-96.8%25-green.svg)](#)
+  [![AI Accuracy: 99.37%](https://img.shields.io/badge/AI_Accuracy-99.37%25-green.svg)](#)
 </div>
 
 <hr/>
@@ -69,13 +69,35 @@ We didn't just build a UI; we trained real Machine Learning models to prove our 
 
 * **View the Training Proof:** [Google Colab Notebook Proof](https://colab.research.google.com/drive/1aV5hIDoKI6SiVoTTliaLh9rkAF19opPy#scrollTo=TZ8caa_2mBHl)
 
-**Model Performance (ResNet50 + LightGBM Ensemble):**
-* **Accuracy:** 96.8%
-* **F1 Score:** 0.95
-* **Recall (R1):** 0.94
-* **AUC-ROC:** 0.92
+### Crop Disease Model (CNN)
+* **Accuracy:** 99.37%
 
-*These metrics prove that our combination of Crop Health + Community Trust is a statistically safer bet for banks than traditional CIBIL scores.*
+### Credit Underwriting Model (LightGBM)
+Our proprietary credit model accurately predicts repayment probability even for thin-file farmers.
+
+* **ROC-AUC:** 0.9671
+* **F1 Score:** 0.8900
+* **Accuracy:** 0.8867
+* **Precision:** 0.8885
+* **Recall:** 0.8914
+
+**Classification Report (Defaulted vs Repaid):**
+```text
+              precision    recall  f1-score   support
+
+   Defaulted       0.88      0.88      0.88       583
+      Repaid       0.89      0.89      0.89       617
+
+    accuracy                           0.89      1200
+   macro avg       0.89      0.89      0.89      1200
+weighted avg       0.89      0.89      0.89      1200
+```
+
+<div align="center">
+  <img src="./images/graph.png" alt="Model Evaluation Graph" width="600"/>
+</div>
+
+*These metrics mathematically prove that our combination of Crop Health Data + Community Trust acts as a superior risk-assessment tool compared to traditional CIBIL scores.*
 
 ---
 
