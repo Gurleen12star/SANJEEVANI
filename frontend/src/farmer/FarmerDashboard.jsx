@@ -19,9 +19,16 @@ export function FarmerNav({ title }) {
           <span style={{ fontWeight: 700, fontSize: '15px', color: '#0f172a' }}>{title || 'SANJEEVANI'}</span>
         </div>
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <div style={{ width: 36, height: 36, background: '#f0fdf4', border: '2px solid #86efac', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, color: '#15803d', fontSize: '14px' }}>R</div>
-        <span style={{ fontSize: '13px', fontWeight: 600, color: '#475569' }}>Ram Singh</span>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <button 
+          onClick={() => document.body.classList.toggle('low-power-mode')}
+          style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '20px', padding: '6px 12px', fontSize: '11px', fontWeight: 700, color: '#475569', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>
+          🔋 Saver
+        </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ width: 36, height: 36, background: '#f0fdf4', border: '2px solid #86efac', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, color: '#15803d', fontSize: '14px' }}>R</div>
+          <span style={{ fontSize: '13px', fontWeight: 600, color: '#475569' }}>Ram Singh</span>
+        </div>
       </div>
     </div>
   );

@@ -15,6 +15,49 @@ app.add_middleware(
 )
 
 # ─────────────────────────────────────────────────────────────────
+# FAANG/IBM SECURITY PROTOCOL: Rate Limiting & Auth Middleware
+# ─────────────────────────────────────────────────────────────────
+from fastapi import Request
+from fastapi.responses import JSONResponse
+import time
+
+class IBMEnterpriseSecurityMiddleware:
+    def __init__(self, app):
+        self.app = app
+        self.ip_tracker = {}
+        
+    async def __call__(self, scope, receive, send):
+        if scope["type"] != "http":
+            return await self.app(scope, receive, send)
+            
+        request = Request(scope, receive=receive)
+        client_ip = request.client.host if request.client else "unknown"
+        
+        # 1. Dummy Rate Limiter (Max 100 requests per minute)
+        current_time = time.time()
+        if client_ip not in self.ip_tracker:
+            self.ip_tracker[client_ip] = []
+        
+        # Filter requests in the last 60 seconds
+        self.ip_tracker[client_ip] = [t for t in self.ip_tracker[client_ip] if current_time - t < 60]
+        
+        if len(self.ip_tracker[client_ip]) > 100:
+            response = JSONResponse(status_code=429, content={"detail": "IBM Security: Rate Limit Exceeded (DDoS Protection)"})
+            return await response(scope, receive, send)
+            
+        self.ip_tracker[client_ip].append(current_time)
+        
+        # 2. Dummy Auth Validation (Passes for Hackathon demo, but proves intent)
+        # auth_header = request.headers.get("Authorization")
+        # if not auth_header or not auth_header.startswith("Bearer "):
+        #     response = JSONResponse(status_code=401, content={"detail": "IBM Security: Missing or Invalid API Key"})
+        #     return await response(scope, receive, send)
+            
+        await self.app(scope, receive, send)
+
+app.add_middleware(IBMEnterpriseSecurityMiddleware)
+
+# ─────────────────────────────────────────────────────────────────
 # Class labels — alphabetically ordered as ImageFolder would produce
 # from the PlantVillage-style dataset used in training.
 # These 15 names map exactly to the classifier.1 output neurons.
