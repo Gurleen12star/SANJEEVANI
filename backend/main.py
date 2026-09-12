@@ -25,6 +25,14 @@ class IBMEnterpriseSecurityMiddleware:
     def __init__(self, app):
         self.app = app
         self.ip_tracker = {}
+        # Distributed Redis Cache for Multi-Worker Scaling
+        try:
+            import redis
+            self.redis_client = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
+            self.redis_client.ping()
+            self.use_redis = True
+        except:
+            self.use_redis = False
         
     async def __call__(self, scope, receive, send):
         if scope["type"] != "http":
@@ -33,19 +41,31 @@ class IBMEnterpriseSecurityMiddleware:
         request = Request(scope, receive=receive)
         client_ip = request.client.host if request.client else "unknown"
         
-        # 1. Dummy Rate Limiter (Max 100 requests per minute)
+        # 1. FAANG/IBM Rate Limiter (Max 100 requests per minute)
         current_time = time.time()
-        if client_ip not in self.ip_tracker:
-            self.ip_tracker[client_ip] = []
         
-        # Filter requests in the last 60 seconds
-        self.ip_tracker[client_ip] = [t for t in self.ip_tracker[client_ip] if current_time - t < 60]
-        
-        if len(self.ip_tracker[client_ip]) > 100:
-            response = JSONResponse(status_code=429, content={"detail": "IBM Security: Rate Limit Exceeded (DDoS Protection)"})
-            return await response(scope, receive, send)
+        if self.use_redis:
+            # Distributed approach
+            key = f"rate_limit:{client_ip}"
+            reqs = self.redis_client.get(key)
+            if reqs and int(reqs) > 100:
+                return JSONResponse(status_code=429, content={"detail": "IBM Security: Distributed Rate Limit Exceeded"})
+            self.redis_client.incr(key)
+            if not reqs:
+                self.redis_client.expire(key, 60)
+        else:
+            # Fallback in-memory approach for MVP
+            if client_ip not in self.ip_tracker:
+                self.ip_tracker[client_ip] = []
             
-        self.ip_tracker[client_ip].append(current_time)
+            # Filter requests in the last 60 seconds
+            self.ip_tracker[client_ip] = [t for t in self.ip_tracker[client_ip] if current_time - t < 60]
+            
+            if len(self.ip_tracker[client_ip]) > 100:
+                response = JSONResponse(status_code=429, content={"detail": "IBM Security: Rate Limit Exceeded (DDoS Protection)"})
+                return await response(scope, receive, send)
+                
+            self.ip_tracker[client_ip].append(current_time)
         
         # 2. Dummy Auth Validation (Passes for Hackathon demo, but proves intent)
         # auth_header = request.headers.get("Authorization")

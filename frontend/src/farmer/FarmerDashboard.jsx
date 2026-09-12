@@ -46,15 +46,35 @@ export default function FarmerDashboard() {
   const [showXAI, setShowXAI] = useState(false);
   useEffect(() => {
     if (!trustScore) return;
+    
+    // Low Power Mode check: Skip animation entirely if enabled
+    if (document.body.classList.contains('low-power-mode')) {
+      setDisplayScore(trustScore.score);
+      return;
+    }
+
     let current = 0;
     const target = trustScore.score;
-    const step = Math.ceil(target / 40);
-    const timer = setInterval(() => {
-      current = Math.min(current + step, target);
+    const duration = 1000; // 1 second animation
+    const startTime = performance.now();
+    let animationFrameId;
+
+    const animate = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease-out cubic function for smooth deceleration
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      
+      current = Math.round(easeOut * target);
       setDisplayScore(current);
-      if (current >= target) clearInterval(timer);
-    }, 30);
-    return () => clearInterval(timer);
+
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrameId);
   }, [trustScore]);
 
   const statusConfig = {

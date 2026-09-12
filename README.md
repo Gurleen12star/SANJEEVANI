@@ -176,9 +176,10 @@ architecture-beta
 ### 🚀 Enterprise Production Roadmap
 To scale this prototype to a FAANG-level production environment, our architecture roadmap includes:
 1. **End-Use Tracking (e-RUPI):** To guarantee that farmers use the loan *only* for agriculture, Phase 2 integrates **e-RUPI (Closed-Loop Digital Rupee)**. The ₹1,20,000 limit is disbursed as digital vouchers that can only be spent at verified fertilizer/seed vendors.
-2. **True Cryptographic ZKP:** Migrating from UI-level hashing to **zk-SNARK circuits (via SnarkJS)** on a blockchain L2 to cryptographically verify data without revealing it.
-3. **Horizontal ML Scaling:** Offloading synchronous FastAPI PyTorch inference to **AWS SageMaker endpoints** and **Celery + Redis message queues** to prevent server OOM under concurrent farmer load.
-4. **MLOps & Model Drift:** Implementing a continuous retraining pipeline to prevent seasonal model drift as climate change alters crop disease patterns.
+2. **Rural Execution (Vendor PoS Camps):** To solve the execution risk of e-RUPI, we will launch offline Vendor Onboarding Camps to supply rural fertilizer shops with the basic Point-of-Sale QR hardware needed to accept the closed-loop vouchers.
+3. **True Cryptographic ZKP:** Migrating from UI-level hashing to **zk-SNARK circuits (via SnarkJS)** on a blockchain L2 to cryptographically verify data without revealing it.
+4. **Edge AI Optimization (ONNX INT8):** Offloading synchronous FastAPI PyTorch inference to **INT8 Quantized ONNX models**. This allows the heavy ResNet50 model to run *directly on the farmer's smartphone offline*, completely eliminating rural internet latency and server bottlenecks.
+5. **Distributed Redis Caching:** Upgrading our API Rate Limiting middleware from an in-memory dictionary to a centralized Redis cluster to securely handle horizontal scaling across multiple Gunicorn workers.
 
 ---
 
