@@ -8,7 +8,8 @@ const callCVModel = async (file) => {
   try {
     const formData = new FormData();
     formData.append('file', file);
-    const res = await fetch('http://localhost:8000/api/crop-health', {
+    const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+    const res = await fetch(`${API_BASE_URL}/api/crop-health`, {
       method: 'POST',
       body: formData,
     });
