@@ -138,8 +138,8 @@ export default function SelectiveDisclosure() {
       <div style={{ maxWidth: '480px', margin: '0 auto', padding: '24px 16px' }}>
 
         <div style={{ marginBottom: '16px' }}>
-          <h2 style={{ fontSize: '22px', fontWeight: 800, color: '#0f172a', marginBottom: '8px' }}>Control Your Data</h2>
-          <p style={{ fontSize: '13px', color: '#64748b', lineHeight: 1.6 }}>Choose what the bank can see. You are always in control — hidden fields stay private in your vault.</p>
+          <h2 style={{ fontSize: '22px', fontWeight: 800, color: '#0f172a', marginBottom: '8px' }}>Protect Your Identity</h2>
+          <p style={{ fontSize: '13px', color: '#64748b', lineHeight: 1.6 }}>Choose what the bank can see. Turn off a switch to <strong>Hide from Bank</strong>. Hidden fields stay completely private.</p>
         </div>
 
         {/* Disclaimer & Manual Entry Mode */}
@@ -172,11 +172,11 @@ export default function SelectiveDisclosure() {
         <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
           <div style={{ flex: 1, textAlign: 'center', padding: '10px', background: '#f0fdf4', border: '1.5px solid #86efac', borderRadius: '12px' }}>
             <div style={{ fontWeight: 800, fontSize: '18px', color: '#15803d' }}>{sharedCount}</div>
-            <div style={{ fontSize: '11px', color: '#64748b', fontWeight: 600 }}>Sharing</div>
+            <div style={{ fontSize: '11px', color: '#64748b', fontWeight: 600 }}>Showing Bank</div>
           </div>
           <div style={{ flex: 1, textAlign: 'center', padding: '10px', background: '#fff7ed', border: '1.5px solid #fed7aa', borderRadius: '12px' }}>
             <div style={{ fontWeight: 800, fontSize: '18px', color: '#c2410c' }}>{hiddenCount}</div>
-            <div style={{ fontSize: '11px', color: '#64748b', fontWeight: 600 }}>Hidden</div>
+            <div style={{ fontSize: '11px', color: '#64748b', fontWeight: 600 }}>Protected (Hidden)</div>
           </div>
         </div>
 

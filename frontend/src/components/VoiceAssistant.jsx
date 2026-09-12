@@ -252,7 +252,7 @@ export default function VoiceAssistant() {
   if (isFpoRoute) return null;
 
   return (
-    <div style={{ position: 'fixed', bottom: '24px', right: '24px', zIndex: 100, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '12px' }}>
+    <div style={{ position: 'fixed', bottom: '100px', right: '24px', zIndex: 100, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '12px' }}>
       
       {/* Menu */}
       {isOpen && (

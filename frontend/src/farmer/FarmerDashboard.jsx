@@ -105,9 +105,6 @@ export default function FarmerDashboard() {
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
                 <div style={{ fontSize: '12px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: '1px' }}>Sanjeevani Trust Score</div>
-                <div style={{ background: '#fef3c7', color: '#b45309', padding: '2px 6px', borderRadius: '4px', fontSize: '10px', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                  <span>⛅</span> Monsoon Risk: Low
-                </div>
               </div>
               {trustScore ? (
                 <>
