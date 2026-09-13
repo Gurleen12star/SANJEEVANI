@@ -64,6 +64,25 @@ export default function FPOVouching() {
     }, 2500);
   };
 
+  const handleRemoveVouch = (member) => {
+    // Remove the vouch from global state
+    const newVouches = state.vouches.filter(v => !(v.name === member.name && v.fpoId === member.fpoId));
+    
+    // Deduct the points and remove the shap feature
+    const currentScore = state.trustScore?.score || 65;
+    const newTrustScore = {
+      ...state.trustScore,
+      score: Math.max(0, currentScore - 15),
+      shap_features: (state.trustScore?.shap_features || []).filter(f => f !== 'FPO Vouch Confirmed (+15)')
+    };
+
+    update({ vouches: newVouches, trustScore: newTrustScore });
+    
+    // Also reset local vouches state immediately so UI updates instantly
+    setVouches(newVouches);
+    animateScoreTo(newTrustScore.score);
+  };
+
   // Sync local vouches with global context and auto-stop 'requesting' if vouch is received
   useEffect(() => {
     if (state.vouches.length > vouches.length) {
@@ -131,15 +150,18 @@ export default function FPOVouching() {
                   <div style={{ fontSize: '11px', color: '#64748b' }}>{member.role}</div>
                 </div>
                 <button
-                  onClick={() => !vouched && !isLoading && handleRequestVouch(member)}
-                  disabled={vouched || isLoading}
+                  onClick={() => {
+                    if (vouched) handleRemoveVouch(member);
+                    else if (!isLoading) handleRequestVouch(member);
+                  }}
+                  disabled={isLoading}
                   style={{
-                    padding: '8px 16px', borderRadius: '10px', fontSize: '12px', fontWeight: 700, cursor: vouched || isLoading ? 'default' : 'pointer', border: 'none',
-                    background: vouched ? '#f0fdf4' : isLoading ? '#fef3c7' : '#7c3aed',
-                    color: vouched ? '#15803d' : isLoading ? '#d97706' : '#fff',
+                    padding: '8px 16px', borderRadius: '10px', fontSize: '12px', fontWeight: 700, cursor: isLoading ? 'default' : 'pointer', border: 'none',
+                    background: vouched ? '#fee2e2' : isLoading ? '#fef3c7' : '#7c3aed',
+                    color: vouched ? '#991b1b' : isLoading ? '#d97706' : '#fff',
                     minWidth: '80px', transition: 'all 0.2s'
                   }}>
-                  {vouched ? '✓ Vouched' : isLoading ? (state.pendingVouchRequest ? 'Waiting for FPO…' : 'Waiting…') : 'Request'}
+                  {vouched ? '✕ Un-Vouch' : isLoading ? (state.pendingVouchRequest ? 'Waiting for FPO…' : 'Waiting…') : 'Request'}
                 </button>
               </div>
             );
