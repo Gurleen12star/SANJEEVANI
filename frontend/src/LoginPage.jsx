@@ -65,18 +65,18 @@ export default function LoginPage() {
             </div>
           </div>
 
-          {/* Farmer / FPO Toggle */}
-          <div style={{ display: 'flex', gap: '8px', marginBottom: '24px' }}>
+          {/* Farmer / Bank Toggle */}
+          <div style={{ display: 'flex', background: '#f1f5f9', borderRadius: '14px', padding: '6px', marginBottom: '32px' }}>
             {['farmer', 'fpo'].map(t => (
-              <button key={t} onClick={() => { setTab(t); setMobile(''); setPassword(''); }}
+              <button key={t} onClick={() => setTab(t)}
                 style={{
-                  flex: 1, padding: '10px', borderRadius: '10px', fontWeight: 700, fontSize: '13px', cursor: 'pointer',
-                  border: tab === t ? '2px solid #16a34a' : '2px solid #e2e8f0',
-                  background: tab === t ? '#f0fdf4' : '#fff',
-                  color: tab === t ? '#15803d' : '#94a3b8',
-                  transition: 'all 0.2s'
+                  flex: 1, padding: '12px', border: 'none', borderRadius: '10px',
+                  fontSize: '15px', fontWeight: 700, cursor: 'pointer', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  background: tab === t ? '#fff' : 'transparent',
+                  color: tab === t ? (t === 'farmer' ? '#15803d' : '#1e3a8a') : '#64748b',
+                  boxShadow: tab === t ? '0 4px 12px rgba(0,0,0,0.05)' : 'none'
                 }}>
-                {t === 'farmer' ? '🌾 Farmer' : '🏢 FPO'}
+                {t === 'farmer' ? '🌾 Farmer' : '🏢 Bank'}
               </button>
             ))}
           </div>
@@ -160,8 +160,8 @@ export default function LoginPage() {
                 🌾 Auto-fill Farmer credentials
               </button>
               <button onClick={() => autoFill('fpo')}
-                style={{ width: '100%', height: '38px', background: '#eff6ff', border: '1.5px solid #93c5fd', borderRadius: '10px', color: '#1d4ed8', fontWeight: 700, fontSize: '12px', cursor: 'pointer' }}>
-                🏢 Auto-fill FPO credentials
+                style={{ width: '100%', height: '44px', background: '#eff6ff', color: '#1e40af', border: 'none', borderRadius: '12px', fontWeight: 600, fontSize: '13px', cursor: 'pointer' }}>
+                🏢 Auto-fill Bank credentials
               </button>
             </div>
           </div>
