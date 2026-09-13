@@ -69,6 +69,12 @@ export default function CropScanner() {
   const [showXAI, setShowXAI] = useState(false);
   const fileRef = useRef();
 
+  // Reset the scanner completely when the user enters the page for a fresh demo flow
+  useEffect(() => {
+    update({ cropScan: null });
+    setResult(null);
+  }, []);
+
   const handleFile = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -111,19 +117,6 @@ export default function CropScanner() {
               <h2 style={{ fontSize: '22px', fontWeight: 800, color: '#0f172a', marginBottom: '8px' }}>Scan Your Crop</h2>
               <p style={{ fontSize: '13px', color: '#64748b', lineHeight: 1.6 }}>Take or upload a clear photo of your crop. Our AI will analyze it for disease, health, and quality.</p>
             </div>
-
-            {/* Previous result if exists */}
-            {state.cropScan && (
-              <div style={{ background: '#f0fdf4', border: '1.5px solid #86efac', borderRadius: '16px', padding: '16px', marginBottom: '20px', display: 'flex', gap: '12px', alignItems: 'center' }}>
-                <span style={{ fontSize: '24px' }}>🌱</span>
-                <div>
-                  <div style={{ fontWeight: 700, fontSize: '14px', color: '#15803d' }}>
-                    Last Scan: {state.cropScan.crop_health_score >= 80 ? 'Good Health' : (state.cropScan.crop_health_score >= 55 ? 'Medium Health' : 'Poor Health')}
-                  </div>
-                  <div style={{ fontSize: '12px', color: '#64748b' }}>Health Score: {state.cropScan.crop_health_score}/100 · Tap below to re-scan</div>
-                </div>
-              </div>
-            )}
 
             {/* Upload Box */}
             <button onClick={() => fileRef.current.click()}
