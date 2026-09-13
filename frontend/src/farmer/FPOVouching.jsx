@@ -33,6 +33,11 @@ export default function FPOVouching() {
   };
 
   const handleRequestVouch = (member) => {
+    if (state.vouches.length >= 1) {
+      alert('Only one vouch is allowed for this demo.');
+      return;
+    }
+    
     setRequesting(member.id);
     update({ pendingVouchRequest: true });
     
