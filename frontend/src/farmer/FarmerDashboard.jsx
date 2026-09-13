@@ -251,7 +251,7 @@ export default function FarmerDashboard() {
         {/* Action Cards */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           <div style={{ fontWeight: 700, fontSize: '14px', color: '#475569', marginBottom: '4px' }}>Actions</div>
-          {card(() => navigate('/farmer/scan'), '📷', 'Crop Health Scanner', cropScan ? `Last scan: ${cropScan.predicted_class}` : 'Scan your crop to build trust', '#16a34a')}
+          {card(() => navigate('/scan'), '📸', 'Scan Crop Health', cropScan ? `Last scan: ${cropScan.crop_health_score >= 80 ? 'Good Health' : (cropScan.crop_health_score >= 55 ? 'Medium Health' : 'Poor Health')}` : 'Verify assets using AI computer vision.', '#16a34a')}
           {card(() => navigate('/farmer/vouch'), '🤝', 'FPO Vouching', `${vouches.length} community vouch${vouches.length !== 1 ? 'es' : ''} received`, '#7c3aed')}
           {card(() => navigate('/farmer/loan'), '💰', 'Request a Loan', trustScore ? 'Your score is ready — apply now' : 'Complete scan & vouching first', '#0ea5e9')}
           {card(() => navigate('/farmer/status'), '📋', 'Loan Status', `Current: ${status.label}`, '#f59e0b')}

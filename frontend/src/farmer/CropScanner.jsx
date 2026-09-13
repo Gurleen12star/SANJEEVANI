@@ -114,7 +114,9 @@ export default function CropScanner() {
               <div style={{ background: '#f0fdf4', border: '1.5px solid #86efac', borderRadius: '16px', padding: '16px', marginBottom: '20px', display: 'flex', gap: '12px', alignItems: 'center' }}>
                 <span style={{ fontSize: '24px' }}>🌱</span>
                 <div>
-                  <div style={{ fontWeight: 700, fontSize: '14px', color: '#15803d' }}>Last Scan: {state.cropScan.predicted_class}</div>
+                  <div style={{ fontWeight: 700, fontSize: '14px', color: '#15803d' }}>
+                    Last Scan: {state.cropScan.crop_health_score >= 80 ? 'Good Health' : (state.cropScan.crop_health_score >= 55 ? 'Medium Health' : 'Poor Health')}
+                  </div>
                   <div style={{ fontSize: '12px', color: '#64748b' }}>Health Score: {state.cropScan.crop_health_score}/100 · Tap below to re-scan</div>
                 </div>
               </div>
@@ -237,16 +239,25 @@ export default function CropScanner() {
             <div style={{ background: '#fff', borderRadius: '20px', padding: '24px', border: `2px solid ${healthColor(result.crop_health_score)}30`, boxShadow: '0 4px 20px rgba(0,0,0,0.07)', marginBottom: '16px' }}>
               
               {/* Diagnosis Header */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                 <div>
                   <div style={{ fontSize: '12px', color: '#64748b', fontWeight: 600, marginBottom: '4px' }}>DIAGNOSIS</div>
-                  <div style={{ fontSize: '22px', fontWeight: 800, color: '#0f172a' }}>{result.predicted_class}</div>
+                  <div style={{ fontSize: '22px', fontWeight: 800, color: '#0f172a' }}>
+                    {result.crop_health_score >= 80 ? 'Good Health' : (result.crop_health_score >= 55 ? 'Medium Health' : 'Poor Health')}
+                  </div>
                 </div>
                 <div style={{ textAlign: 'center', background: healthColor(result.crop_health_score) + '15', borderRadius: '12px', padding: '12px 16px' }}>
                   <div style={{ fontSize: '28px', fontWeight: 900, color: healthColor(result.crop_health_score) }}>{result.crop_health_score}</div>
                   <div style={{ fontSize: '11px', color: '#64748b', fontWeight: 700 }}>/ 100</div>
                 </div>
               </div>
+
+              {/* Descriptive Paragraph */}
+              <p style={{ fontSize: '13px', color: '#475569', lineHeight: 1.6, marginBottom: '20px', padding: '12px', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                {result.crop_health_score >= 80 
+                  ? 'The AI model analyzed the leaf structure and detected a healthy crop with no significant signs of disease or damage. Yield potential is optimal.'
+                  : 'The AI model detected signs of damage, disease, or stress in the crop structure. This could impact overall yield and repayment capacity.'}
+              </p>
 
               {/* Health bar */}
               <div style={{ marginBottom: '16px' }}>
