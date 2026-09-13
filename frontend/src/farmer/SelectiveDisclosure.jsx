@@ -167,11 +167,24 @@ export default function SelectiveDisclosure() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '16px' }}>
               <input type="text" placeholder="Enter Farm Location (GPS/Address)" style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0', fontSize: '13px', boxSizing: 'border-box' }} />
               <input type="text" placeholder="Enter Crop Type" style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0', fontSize: '13px', boxSizing: 'border-box' }} />
-              <input type="text" placeholder="Enter Health Status" style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0', fontSize: '13px', boxSizing: 'border-box' }} />
               <input type="text" placeholder="Enter Est. Yield (Quintals)" style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0', fontSize: '13px', boxSizing: 'border-box' }} />
               <input type="text" placeholder="Enter Land Ownership Details" style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0', fontSize: '13px', boxSizing: 'border-box' }} />
               <input type="text" placeholder="Enter Aadhaar Number" style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0', fontSize: '13px', boxSizing: 'border-box' }} />
               <input type="text" placeholder="Enter Bank History / Account Info" style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0', fontSize: '13px', boxSizing: 'border-box' }} />
+            </div>
+
+            <div style={{ fontSize: '12px', fontWeight: 700, color: '#15803d', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span>🚀</span> High-Trust Alternative Data
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '16px', padding: '12px', background: '#f0fdf4', border: '1px solid #86efac', borderRadius: '8px' }}>
+              <div>
+                <div style={{ fontSize: '11px', fontWeight: 700, color: '#166534', marginBottom: '4px' }}>PM-KISAN DBT ID (+20 Trust Score)</div>
+                <input type="text" placeholder="Enter 12-digit PM-KISAN ID" style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #86efac', fontSize: '13px', boxSizing: 'border-box' }} />
+              </div>
+              <div>
+                <div style={{ fontSize: '11px', fontWeight: 700, color: '#166534', marginBottom: '4px' }}>e-NWR Warehouse Receipt (+30 Trust Score)</div>
+                <input type="text" placeholder="Enter e-NWR Collateral ID" style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #86efac', fontSize: '13px', boxSizing: 'border-box' }} />
+              </div>
             </div>
 
             <div style={{ padding: '12px', border: '1px solid #e2e8f0', borderRadius: '8px', background: '#f8fafc' }}>
