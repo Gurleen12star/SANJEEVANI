@@ -34,12 +34,29 @@ export default function FPOVouching() {
 
   const handleRequestVouch = (member) => {
     setRequesting(member.id);
-    
-    // Instead of auto-resolving, we set a global pending request that the FPO Dashboard will see
     update({ pendingVouchRequest: true });
     
-    // We will stay in the 'requesting' state until the FPO approves it
-    // When the FPO approves, they will add to the `vouches` array in context
+    // HACKATHON DEMO MODE: Auto-approve after 2.5s so they don't have to switch to the FPO portal
+    setTimeout(() => {
+      const newVouch = {
+        name: member.name,
+        fpoId: member.fpoId,
+        date: new Date().toLocaleDateString('en-GB')
+      };
+      
+      const newTrustScore = {
+        score: Math.min(100, (state.trustScore?.score || 50) + 15),
+        risk_band: 'Low',
+        shap_features: [...(state.trustScore?.shap_features || []), 'FPO Vouch Confirmed (+15)']
+      };
+
+      update({ 
+        vouches: [...state.vouches, newVouch],
+        trustScore: newTrustScore,
+        pendingVouchRequest: false 
+      });
+      setRequesting(null);
+    }, 2500);
   };
 
   // Sync local vouches with global context and auto-stop 'requesting' if vouch is received
