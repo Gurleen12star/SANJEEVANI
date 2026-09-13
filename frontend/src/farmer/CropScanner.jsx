@@ -76,15 +76,18 @@ export default function CropScanner() {
     setPreview(url);
     setStage('scanning');
     callCVModel(file).then(data => {
-      if (data.is_authentic === false) {
-        setResult(data);
-        window.dispatchEvent(new CustomEvent('trigger-voice', { detail: 'fraud_rejected' }));
-      } else {
-        update({ cropScan: data });
-        setResult(data);
-        window.dispatchEvent(new CustomEvent('trigger-voice', { detail: 'scan_complete' }));
-      }
-      setStage('result');
+      // HACKATHON UX FIX: Artificial delay so the local PyTorch model doesn't finish instantly, allowing the scanning animation to play.
+      setTimeout(() => {
+        if (data.is_authentic === false) {
+          setResult(data);
+          window.dispatchEvent(new CustomEvent('trigger-voice', { detail: 'fraud_rejected' }));
+        } else {
+          update({ cropScan: data });
+          setResult(data);
+          window.dispatchEvent(new CustomEvent('trigger-voice', { detail: 'scan_complete' }));
+        }
+        setStage('result');
+      }, 2500);
     });
   };
 
