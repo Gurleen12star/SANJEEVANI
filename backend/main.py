@@ -100,23 +100,23 @@ CLASS_LABELS = [
     "Tomato_healthy",
 ]
 
-# Human-readable display names (Mapped for Hackathon Demo: Wheat, Paddy, Cotton)
+# Human-readable display names
 DISPLAY_NAMES = {
-    "Pepper__bell___Bacterial_spot":                    "Paddy – Ruined/Damaged",
-    "Pepper__bell___healthy":                           "Paddy – Perfect Crop",
-    "Potato___Early_blight":                            "Wheat – Ruined/Damaged",
-    "Potato___Late_blight":                             "Wheat – Severely Damaged",
-    "Potato___healthy":                                 "Wheat – Perfect Crop",
-    "Tomato_Bacterial_spot":                            "Cotton – Ruined/Damaged",
-    "Tomato_Early_blight":                              "Cotton – Early Damage",
-    "Tomato_Late_blight":                               "Cotton – Severely Damaged",
-    "Tomato_Leaf_Mold":                                 "Cotton – Leaf Mold",
-    "Tomato_Septoria_leaf_spot":                        "Cotton – Spot Damage",
-    "Tomato_Spider_mites_Two_spotted_spider_mite":      "Cotton – Pest Infestation",
-    "Tomato__Target_Spot":                              "Cotton – Target Spot",
-    "Tomato__Tomato_YellowLeaf__Curl_Virus":            "Cotton – Virus Detected",
-    "Tomato__Tomato_mosaic_virus":                      "Cotton – Mosaic Virus",
-    "Tomato_healthy":                                   "Cotton – Perfect Crop",
+    "Pepper__bell___Bacterial_spot":                    "Pepper – Bacterial Spot",
+    "Pepper__bell___healthy":                           "Pepper – Healthy",
+    "Potato___Early_blight":                            "Potato – Early Blight",
+    "Potato___Late_blight":                             "Potato – Late Blight",
+    "Potato___healthy":                                 "Potato – Healthy",
+    "Tomato_Bacterial_spot":                            "Tomato – Bacterial Spot",
+    "Tomato_Early_blight":                              "Tomato – Early Blight",
+    "Tomato_Late_blight":                               "Tomato – Late Blight",
+    "Tomato_Leaf_Mold":                                 "Tomato – Leaf Mold",
+    "Tomato_Septoria_leaf_spot":                        "Tomato – Septoria Leaf Spot",
+    "Tomato_Spider_mites_Two_spotted_spider_mite":      "Tomato – Spider Mites",
+    "Tomato__Target_Spot":                              "Tomato – Target Spot",
+    "Tomato__Tomato_YellowLeaf__Curl_Virus":            "Tomato – Yellow Leaf Curl Virus",
+    "Tomato__Tomato_mosaic_virus":                      "Tomato – Mosaic Virus",
+    "Tomato_healthy":                                   "Tomato – Healthy",
 }
 
 # Healthy class indices (for computing health score as per the notebook fix)
@@ -239,51 +239,8 @@ async def predict_crop_health(file: UploadFile = File(...)):
 
     tensor = TRANSFORM(img).unsqueeze(0).to(DEVICE)
     with torch.no_grad():
-        _ = CROP_MODEL(tensor) # Warm up model
-
-        # --- FOOLPROOF HACKATHON COMPUTER VISION OVERRIDE ---
-        # Instead of relying on brittle PyTorch weights for random web photos, 
-        # we use deterministic HSV Color Space analysis to perfectly detect disease.
-        img_np = np.array(img_pil_orig.convert("RGB"))
-        hsv = cv2.cvtColor(img_np, cv2.COLOR_RGB2HSV)
-        
-        # Define color bounds
-        lower_green = np.array([30, 40, 40])
-        upper_green = np.array([85, 255, 255])
-        lower_disease = np.array([10, 40, 40])
-        upper_disease = np.array([29, 255, 255])
-        
-        mask_green = cv2.inRange(hsv, lower_green, upper_green)
-        mask_disease = cv2.inRange(hsv, lower_disease, upper_disease)
-        
-        green_px = cv2.countNonZero(mask_green)
-        disease_px = cv2.countNonZero(mask_disease)
-        total_px = green_px + disease_px
-        
-        # Deterministically select crop based on image file size to simulate AI classifying different crop types
-        crop_seed = len(contents) % 3
-        crop_map = {
-            0: {"healthy": 1, "ruined": 0},   # Paddy
-            1: {"healthy": 4, "ruined": 2},   # Wheat
-            2: {"healthy": 14, "ruined": 5}   # Cotton
-        }
-        healthy_idx = crop_map[crop_seed]["healthy"]
-        ruined_idx = crop_map[crop_seed]["ruined"]
-        
-        probs = np.zeros(len(CLASS_LABELS))
-        if total_px == 0:
-            probs[healthy_idx] = 0.95 # Default healthy
-        else:
-            green_ratio = green_px / total_px
-            if green_ratio > 0.55:
-                # Leaf is predominantly green -> Perfect Crop
-                probs[healthy_idx] = min(0.99, 0.70 + (green_ratio * 0.3))
-                probs[ruined_idx] = 1.0 - probs[healthy_idx]
-            else:
-                # Leaf has significant yellow/brown -> Ruined/Damaged
-                disease_ratio = disease_px / total_px
-                probs[ruined_idx] = min(0.99, 0.75 + (disease_ratio * 0.25))
-                probs[healthy_idx] = 1.0 - probs[ruined_idx]
+        logits = CROP_MODEL(tensor)
+        probs = torch.softmax(logits, dim=1)[0].cpu().numpy()
 
     top_idx = int(np.argmax(probs))
     raw_class = CLASS_LABELS[top_idx]
