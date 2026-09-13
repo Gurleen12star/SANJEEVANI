@@ -162,9 +162,22 @@ export default function SelectiveDisclosure() {
         {manualEntryMode && (
           <div style={{ background: '#fff', border: '1px dashed #cbd5e1', borderRadius: '12px', padding: '16px', marginBottom: '24px', animation: 'slideDown 0.2s ease-out' }}>
             <div style={{ fontSize: '12px', fontWeight: 700, color: '#0f172a', marginBottom: '12px' }}>Manual Entry Mode Active</div>
-            <p style={{ fontSize: '11px', color: '#64748b', marginBottom: '12px' }}>If you proceed, you will need to manually upload documents for each field to the bank later.</p>
-            <input type="text" placeholder="Enter Farm Location" style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0', fontSize: '13px', marginBottom: '10px' }} />
-            <input type="text" placeholder="Enter Crop Type" style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0', fontSize: '13px' }} />
+            <p style={{ fontSize: '11px', color: '#64748b', marginBottom: '12px' }}>Please fill in all details manually and upload supporting documents for bank verification.</p>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '16px' }}>
+              <input type="text" placeholder="Enter Farm Location (GPS/Address)" style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0', fontSize: '13px', boxSizing: 'border-box' }} />
+              <input type="text" placeholder="Enter Crop Type" style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0', fontSize: '13px', boxSizing: 'border-box' }} />
+              <input type="text" placeholder="Enter Health Status" style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0', fontSize: '13px', boxSizing: 'border-box' }} />
+              <input type="text" placeholder="Enter Est. Yield (Quintals)" style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0', fontSize: '13px', boxSizing: 'border-box' }} />
+              <input type="text" placeholder="Enter Land Ownership Details" style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0', fontSize: '13px', boxSizing: 'border-box' }} />
+              <input type="text" placeholder="Enter Aadhaar Number" style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0', fontSize: '13px', boxSizing: 'border-box' }} />
+              <input type="text" placeholder="Enter Bank History / Account Info" style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0', fontSize: '13px', boxSizing: 'border-box' }} />
+            </div>
+
+            <div style={{ padding: '12px', border: '1px solid #e2e8f0', borderRadius: '8px', background: '#f8fafc' }}>
+              <div style={{ fontSize: '11px', fontWeight: 700, color: '#475569', marginBottom: '8px' }}>Upload Verification Documents</div>
+              <input type="file" multiple accept=".pdf,.jpg,.jpeg,.png" style={{ fontSize: '11px', color: '#64748b', width: '100%' }} />
+            </div>
           </div>
         )}
 
